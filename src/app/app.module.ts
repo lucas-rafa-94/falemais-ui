@@ -44,7 +44,7 @@ import 'hammerjs';
       Ng2LoadingSpinnerModule.forRoot({}),
       FormsModule, NgbModule.forRoot(),
       RouterModule.forRoot([
-          { path: 'login', component: LoginPageComponent},
+          { path: 'index.html', component: LoginPageComponent},
           { path: '', component: LoginPageComponent},
           { path: 'users', component: UsersComponent},
           { path: 'call', component: CallComponent}

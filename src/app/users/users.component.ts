@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
 
     getTokenSession() {
         if (!localStorage.getItem('currentToken') || localStorage.getItem('currentToken') === '') {
-            this.router.navigate(['']);
+            this.router.navigate(['index.html']);
         }
     }
 
