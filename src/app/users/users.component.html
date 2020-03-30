@@ -32,7 +32,7 @@
                 <div class="table100-body js-pscroll">
                     <table>
                         <tbody>
-                        <tr *ngFor="let usuario of usuarios| filter:hubId | paginate: { itemsPerPage: 5, currentPage: p };" class="row100 body">
+                        <tr *ngFor="let usuario of usuarios| filter:hubId | paginate: { itemsPerPage: 20, currentPage: p };" class="row100 body">
                             <td class="cell100 column1">{{usuario.hubId}}</td>
                             <td class="cell100 column2">{{usuario.email}}</td>
                             <td class="cell100 column2">{{usuario.faleMaisToken}}</td>

@@ -12,17 +12,20 @@ import {TokenService} from '../services/token/token.service';
 export class CallComponent implements OnInit {
     getService;
     showSpinner;
-    usuarios;
+    logs;
     access_token;
     tokenService;
     msgDelete = '';
     deleteOpen;
     statusApi = 0;
-    usuarioSelecionado = {
-        email: '',
-        id: 0,
-        nome: '',
-        password: ''
+    logselecionado = {
+        idLog: '',
+        hubId: 0,
+        callId: '',
+        operacao: '',
+        status: '',
+        payload: '',
+        log: '',
     }
     visualizacaoOpen;
     criaOrUpdateOpen;
@@ -50,10 +53,10 @@ export class CallComponent implements OnInit {
     }
 
 
-    openLg(content, usuario) {
-            console.log(usuario.nome)
+    openLg(content, log) {
+            console.log(log.nome)
             this.modalService.open(content, {size: 'lg'});
-            this.msgDelete = usuario.nome;
+            this.msgDelete = log.nome;
     }
 
 
@@ -69,15 +72,15 @@ export class CallComponent implements OnInit {
         this.visualizacaoOpen = true;
     }
 
-    openDelete(usuario) {
-        this.usuarioSelecionado = usuario;
+    openDelete(log) {
+        this.logselecionado = log;
         this.criaOrUpdateOpen = false;
         this.visualizacaoOpen = false;
         this.createOpen = false;
         this.deleteOpen = true;
     }
 
-    deleteUsuario() {
+    deletelog() {
         if (this.deleteOpen) {
             return true;
         } else {
@@ -93,7 +96,7 @@ export class CallComponent implements OnInit {
         }
     }
 
-    updateUsuario(){
+    updatelog(){
         if(this.criaOrUpdateOpen) {
             return true;
         } else {
@@ -101,7 +104,7 @@ export class CallComponent implements OnInit {
         }
     }
 
-    createUsuario(){
+    createlog(){
         if(this.createOpen) {
             return true;
         } else {
@@ -126,19 +129,22 @@ export class CallComponent implements OnInit {
     }
 
 
-    openEditar(usuario) {
-        this.usuarioSelecionado = usuario;
+    openEditar(log) {
+        this.logselecionado = log;
         this.criaOrUpdateOpen = true;
         this.visualizacaoOpen = false;
         this.createOpen = false;
     }
 
     openCreate() {
-        this.usuarioSelecionado = {
-            email: '',
-            id: 0,
-            nome: '',
-            password: ''
+        this.logselecionado = {
+            idLog: '',
+            hubId: 0,
+            callId: '',
+            operacao: '',
+            status: '',
+            payload: '',
+            log: '',
         };
         this.criaOrUpdateOpen = false;
         this.visualizacaoOpen = false;
@@ -157,10 +163,10 @@ export class CallComponent implements OnInit {
                         console.log(datain.status);
                         if (datain.status === 200) {
                             console.log(datain);
-                            this.usuarios = datain;
+                            this.logs = datain;
                         } else {
                             console.log(datain);
-                            this.usuarios = datain;
+                            this.logs = datain;
                         }
                         this.showSpinner = false;
                     },
@@ -176,16 +182,16 @@ export class CallComponent implements OnInit {
         // );
     }
 
-    // updateUsuarioAcao(usuario){
+    // updatelogAcao(log){
     //     // this.tokenService.getToken().subscribe(
     //     //     dataToken => {
     //     //         console.log(dataToken.access_token);
     //     //         this.access_token = dataToken.access_token;
     //     this.showSpinner = true;
-    //             this.getService.updateUsuario(usuario, this.access_token).subscribe(
+    //             this.getService.updatelog(log, this.access_token).subscribe(
     //                 data => {
     //                     console.log(data.status);
-    //                     this.usuarios = data;
+    //                     this.logs = data;
     //                     this.statusApi = 1;
     //                     this.showSpinner = false
     //                 },
@@ -202,16 +208,16 @@ export class CallComponent implements OnInit {
     //     // );
     // }
     //
-    // createUsuarioAcao(usuario){
+    // createlogAcao(log){
     //     // this.tokenService.getToken().subscribe(
     //     //     dataToken => {
     //     //         console.log(dataToken.access_token);
     //     //         this.access_token = dataToken.access_token;
     //     this.showSpinner = true;
-    //             this.getService.createUsuario(usuario, this.access_token).subscribe(
+    //             this.getService.createlog(log, this.access_token).subscribe(
     //                 data => {
     //                     console.log(data.status);
-    //                     this.usuarios = data;
+    //                     this.logs = data;
     //                     this.statusApi = 1;
     //                     this.showSpinner = false;
     //                 },
@@ -228,14 +234,14 @@ export class CallComponent implements OnInit {
     //     // );
     // }
     //
-    // deleteUsuarioAcao(usuario) {
+    // deletelogAcao(log) {
     //     // this.tokenService.getToken().subscribe(
     //     //     dataToken => {
     //     //         console.log(dataToken.access_token);
     //     //         this.access_token = dataToken.access_token;
-    //             this.getService.deleteUsuario(usuario.id, this.access_token).subscribe(
+    //             this.getService.deletelog(log.id, this.access_token).subscribe(
     //                 data => {
-    //                     this.getUsuarios();
+    //                     this.getlogs();
     //                     this.deleteClose();
     //                 },
     //                 error => {

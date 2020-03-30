@@ -11,16 +11,18 @@
 <!--            </div>-->
             <div class="inner-addon right-addon">
                 <i class="glyphicon glyphicon-search"></i>
-                <input class="form-control" type="text" name="search" id="inputSearch" placeholder="Busque pelo call Id" [(ngModel)]="hubId">
+                <input class="form-control" type="text" name="search" id="inputSearch" placeholder="Busque pelo Id Log" [(ngModel)]="idLog">
             </div>
             <div *ngIf="visualizacao()" class="table100 ver1 m-b-110">
                 <div class="table100-head">
                     <table>
                         <thead>
                         <tr class="row100 head">
-                            <th class="cell100 column1">Call Id</th>
-                            <th class="cell100 column3">Link Audio</th>
-                            <th class="cell100 column3">Duração</th>
+                            <th class="cell100 column1">Id Log</th>
+                            <th class="cell100 column2">Hub Id</th>
+                            <th class="cell100 column3">Operação</th>
+                            <th class="cell100 column4">Status</th>
+                            <th class="cell100 column5">Payload</th>
                         </tr>
                         </thead>
                     </table>
@@ -29,11 +31,12 @@
                 <div class="table100-body js-pscroll">
                     <table>
                         <tbody>
-                        <tr *ngFor="let usuario of usuarios| filter:callId | paginate: { itemsPerPage: 5, currentPage: p };" class="row100 body">
-                            <td class="cell100 column1">{{usuario.callId}}</td>
-                            <td class="cell100 column3">{{usuario.linkAudio}}</td>
-                            <td class="cell100 column3">{{usuario.totalDurationSeconds}}</td>
-                            <td class="cell100 column4"><a (click)="openEditar(usuario)">Editar</a>   |   <a (click)="openDelete(usuario)">Excluir</a></td>
+                        <tr *ngFor="let log of logs| filter:idLog | paginate: { itemsPerPage: 20, currentPage: p };" class="row100 body">
+                            <td class="cell100 column1">{{log.idLog}}</td>
+                            <td class="cell100 column2">{{log.hubId}}</td>
+                            <td class="cell100 column3">{{log.operacao}}</td>
+                            <td class="cell100 column4">{{log.status}}</td>
+                            <td class="cell100 column5">{{log.payload}}</td>
                         </tr>
                         </tbody>
                         <pagination-controls (pageChange)="p = $event"></pagination-controls>
