@@ -7,12 +7,10 @@
 ##CMD ["nginx", "-g", "daemon off;"]
 
 FROM node:11.6.0-alpine AS builder
-COPY . ./oigr-ui
-WORKDIR /oigr-ui
+COPY . ./falemais-ui
+WORKDIR /falemais-ui
 RUN npm i
 RUN $(npm bin)/ng build --prod
 
 FROM nginx:1.15.8-alpine
-COPY --from=builder /oigr-ui/dist/oigr-ui /usr/share/nginx/html
-
-humbertosjm@gmail.com
+COPY --from=builder /falemais-ui/dist/falemais-ui /usr/share/nginx/html

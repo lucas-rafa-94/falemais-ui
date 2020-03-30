@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6348538d-5960-4b4e-8602-585cd51a68a0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/call/call.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/call/call.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/call/call.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/call/call.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/call/call.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/call/call.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/navbar/navbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/call/call.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/call/call.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/users/users.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/users/users.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/users.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +227,7 @@
       <workItem from="1585123109100" duration="514000" />
       <workItem from="1585149074256" duration="1764000" />
       <workItem from="1585163265625" duration="574000" />
-      <workItem from="1585165804278" duration="18544000" />
+      <workItem from="1585165804278" duration="19894000" />
     </task>
     <servers />
   </component>
