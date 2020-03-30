@@ -45,6 +45,7 @@ import 'hammerjs';
       FormsModule, NgbModule.forRoot(),
       RouterModule.forRoot([
           { path: 'login', component: LoginPageComponent},
+          { path: '', component: LoginPageComponent},
           { path: 'users', component: UsersComponent},
           { path: 'call', component: CallComponent}
           ])

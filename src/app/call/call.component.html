@@ -11,7 +11,7 @@
 <!--            </div>-->
             <div class="inner-addon right-addon">
                 <i class="glyphicon glyphicon-search"></i>
-                <input class="form-control" type="text" name="search" id="inputSearch" placeholder="Busque pelo Id Log" [(ngModel)]="idLog">
+                <input class="form-control" type="text" name="search" id="inputSearch" placeholder="Busque pelo Hub Id" [(ngModel)]="hubId">
             </div>
             <div *ngIf="visualizacao()" class="table100 ver1 m-b-110">
                 <div class="table100-head">
@@ -31,7 +31,7 @@
                 <div class="table100-body js-pscroll">
                     <table>
                         <tbody>
-                        <tr *ngFor="let log of logs| filter:idLog | paginate: { itemsPerPage: 20, currentPage: p };" class="row100 body">
+                        <tr *ngFor="let log of logs| filter:hubId | paginate: { itemsPerPage: 20, currentPage: p };" class="row100 body">
                             <td class="cell100 column1">{{log.idLog}}</td>
                             <td class="cell100 column2">{{log.hubId}}</td>
                             <td class="cell100 column3">{{log.operacao}}</td>

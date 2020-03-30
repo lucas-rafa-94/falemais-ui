@@ -16,7 +16,15 @@ export class LoginComponent {
     email: '',
     senha: ''
   };
+
+  getTokenSession() {
+    if (!localStorage.getItem('currentToken') || localStorage.getItem('currentToken') === '') {
+      this.router.navigate(['']);
+    }
+  }
+
   constructor(service: LoginInService, private  router: Router) {
+    this.getTokenSession();
     this.name = service.getName();
     this.getService = service;
     this.loginOn = false;
@@ -36,8 +44,13 @@ export class LoginComponent {
         //     console.log(error);
         //   }
         // );
-      localStorage.setItem('currentToken', 'logado');
-      this.router.navigate(['users']);
+      if(this.login.email === 'admin' && this.login.senha === 'admin' ){
+        this.loginOn = false;
+        localStorage.setItem('currentToken', 'logado');
+        this.router.navigate(['users']);
+      }
+      this.loginOn = true;
+
     }
     getLoginOn() {
         if (this.loginOn) {
