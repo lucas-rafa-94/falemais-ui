@@ -13,6 +13,7 @@ import {RouterModule} from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { UsersComponent } from './users/users.component';
+import { UsersSemCadastroComponent } from './usersSemCadastro/usersSemCadastro.component';
 import { CallComponent } from './call/call.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -26,6 +27,7 @@ import 'hammerjs';
 
 @NgModule({
   declarations: [
+      UsersSemCadastroComponent,
     AppComponent,
     CallComponent,
     LoginComponent,
@@ -47,6 +49,7 @@ import 'hammerjs';
           { path: 'index.html', component: LoginPageComponent},
           { path: '', component: LoginPageComponent},
           { path: 'users', component: UsersComponent},
+          { path: 'users-nao-cadastrados', component: UsersSemCadastroComponent},
           { path: 'call', component: CallComponent}
           ])
 

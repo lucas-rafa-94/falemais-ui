@@ -6,10 +6,10 @@ import {TokenService} from '../services/token/token.service';
 
 @Component({
   selector: 'app-download',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  templateUrl: './usersSemCadastro.component.html',
+  styleUrls: ['./usersSemCadastro.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersSemCadastroComponent implements OnInit {
     getService;
     showSpinner;
     usuarios;
@@ -124,7 +124,7 @@ export class UsersComponent implements OnInit {
         //         console.log(data.access_token);
         //         this.access_token = data.access_token;
         this.showSpinner = true;
-                this.getService.getUsuariosCadastrados(this.access_token).subscribe(
+                this.getService.getUsuariosNaoCadastrados(this.access_token).subscribe(
                     datain => {
                         console.log(datain.status);
                         if (datain.status === 200) {
