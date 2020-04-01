@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginInService} from '../services/loginIn/login-in.service';
 import {Router} from '@angular/router';
+import {UsersComponent} from '../users/users.component';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,8 @@ export class LoginComponent {
   name;
   getService;
   login = {
-    email: '',
-    senha: ''
+    user: '',
+      password: ''
   };
 
   getTokenSession() {
@@ -30,26 +31,21 @@ export class LoginComponent {
     this.loginOn = false;
   }
   postToken() {
-        // this.getService.postGetToken(this.login.email, this.login.senha, this.access_token).subscribe(
-        //   data => {
-        //       if (data.status === 'Login com sucesso') {
-        //           localStorage.setItem('currentToken', 'logado');
-        //           this.router.navigate(['usuarios']);
-        //       } else {
-        //           this.loginOn = true;
-        //       }
-        //     } ,
-        //   error => {
-        //     this.loginOn = true;
-        //     console.log(error);
-        //   }
-        // );
-      if(this.login.email === 'admin' && this.login.senha === 'admin' ){
-        this.loginOn = false;
-        localStorage.setItem('currentToken', 'logado');
-        this.router.navigate(['users']);
-      }
-      this.loginOn = true;
+        this.getService.postGetToken(this.login).subscribe(
+          data => {
+              if (data == null) {
+                  this.loginOn = true;
+              } else {
+                  this.loginOn = false;
+                  localStorage.setItem('currentToken', 'logado');
+                  this.router.navigate(['users']);
+              }
+            } ,
+          error => {
+            this.loginOn = true;
+            console.log(error);
+          }
+        );
 
     }
     getLoginOn() {

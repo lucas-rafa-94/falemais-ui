@@ -19,6 +19,7 @@
                         <thead>
                         <tr class="row100 head">
                             <th class="cell100 column1">Hub Id</th>
+                            <th class="cell100 column1">Id Pabx</th>
                             <th class="cell100 column2">Email</th>
                             <th class="cell100 column2">Fale Mais Token</th>
                             <th class="cell100 column3">Url Pabx</th>
@@ -34,6 +35,7 @@
                         <tbody>
                         <tr *ngFor="let usuario of usuarios| filter:hubId | paginate: { itemsPerPage: 20, currentPage: p };" class="row100 body">
                             <td class="cell100 column1">{{usuario.hubId}}</td>
+                            <td class="cell100 column1">{{usuario.idPabx}}</td>
                             <td class="cell100 column2">{{usuario.email}}</td>
                             <td class="cell100 column2">{{usuario.faleMaisToken}}</td>
                             <td class="cell100 column3">{{usuario.urlPabx}}</td>
@@ -87,6 +89,17 @@
                     <div class="row">
                         <div class="col-md-12">
                             <input [(ngModel)]="usuarioSelecionado.hubId" name="hubId" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Id Pabx</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="usuarioSelecionado.idPabx" name="hubId" type="text" class="form-control">
                         </div>
                     </div>
                     <hr class="my-4">

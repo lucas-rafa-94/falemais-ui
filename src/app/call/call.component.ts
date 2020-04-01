@@ -12,7 +12,9 @@ import {TokenService} from '../services/token/token.service';
 export class CallComponent implements OnInit {
     getService;
     showSpinner;
-    logs;
+    logs = [];
+    searchLogs = [];
+    filterLogs = [];
     access_token;
     tokenService;
     msgDelete = '';
@@ -21,12 +23,22 @@ export class CallComponent implements OnInit {
     logselecionado = {
         idLog: '',
         hubId: 0,
+        idPabx: '',
+        telefone: '',
         callId: '',
         operacao: '',
         status: '',
-        payload: '',
+        startDate: '',
+        endDate: '',
+        payloadRequest: '',
+        payloadResponse: '',
         log: '',
-    }
+    };
+    search = {
+        idHub: '',
+        idPabx: '',
+        telefone: ''
+    };
     visualizacaoOpen;
     criaOrUpdateOpen;
     createOpen;
@@ -53,35 +65,58 @@ export class CallComponent implements OnInit {
     }
 
 
-    openLg(content, log) {
-            console.log(log.nome)
-            this.modalService.open(content, {size: 'lg'});
-            this.msgDelete = log.nome;
-    }
-
-
     ngOnInit() {
     }
 
-    deleteClose() {
-        this.statusApi = 0
-        this.getCall();
-        this.criaOrUpdateOpen = false;
-        this.createOpen = false;
-        this.deleteOpen = false;
-        this.visualizacaoOpen = true;
+    searchBtn(){
+        if((this.search.idHub === '') === false && (this.search.idPabx === '') === false && (this.search.telefone === '') === false ){
+            for(var i = 0; i < this.logs.length; i++){
+                if(this.logs[i].hubId === this.search.idHub && this.logs[i].idPabx === this.search.idPabx &&
+                    this.logs[i].telefone === this.search.telefone){
+                    this.filterLogs.push(this.logs[i]);
+                }
+            }
+        }
+
+        if((this.search.idHub === '') === false && this.search.idPabx === '' && this.search.telefone === '' ){
+            for(var i = 0; i < this.logs.length; i++){
+                if(this.logs[i].hubId === this.search.idHub){
+                    this.filterLogs.push(this.logs[i]);
+                }
+            }
+        }
+
+        if(this.search.idHub === '' && (this.search.idPabx === '') === false && this.search.telefone === '' ){
+            for(var i = 0; i < this.logs.length; i++){
+                if(this.logs[i].idPabx === this.search.idPabx){
+                    this.filterLogs.push(this.logs[i]);
+                }
+            }
+        }
+
+        if(this.search.idPabx === '' && (this.search.telefone === '') === false && this.search.idHub === '' ){
+            for(var i = 0; i < this.logs.length; i++){
+                if(this.logs[i].telefone === this.search.telefone){
+                    this.filterLogs.push(this.logs[i]);
+                }
+            }
+        }
+
+        this.logs = this.filterLogs;
     }
 
-    openDelete(log) {
-        this.logselecionado = log;
-        this.criaOrUpdateOpen = false;
-        this.visualizacaoOpen = false;
-        this.createOpen = false;
-        this.deleteOpen = true;
+    excluirBtn(){
+        console.log(this.searchLogs);
+        this.search = {
+            idHub: '',
+            idPabx: '',
+            telefone: ''
+        };
+        this.logs = this.searchLogs;
     }
 
-    deletelog() {
-        if (this.deleteOpen) {
+    updateUsuario(){
+        if(this.criaOrUpdateOpen) {
             return true;
         } else {
             return false;
@@ -96,31 +131,9 @@ export class CallComponent implements OnInit {
         }
     }
 
-    updatelog(){
-        if(this.criaOrUpdateOpen) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    createlog(){
-        if(this.createOpen) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     updateClose() {
-        this.statusApi = 0;
-        this.criaOrUpdateOpen = false;
-        this.createOpen = false;
-        this.visualizacaoOpen = true;
-        this.getCall();
-    }
-
-    createClose() {
         this.statusApi = 0;
         this.criaOrUpdateOpen = false;
         this.createOpen = false;
@@ -136,21 +149,6 @@ export class CallComponent implements OnInit {
         this.createOpen = false;
     }
 
-    openCreate() {
-        this.logselecionado = {
-            idLog: '',
-            hubId: 0,
-            callId: '',
-            operacao: '',
-            status: '',
-            payload: '',
-            log: '',
-        };
-        this.criaOrUpdateOpen = false;
-        this.visualizacaoOpen = false;
-        this.createOpen = true;
-    }
-
 
     getCall() {
         // this.tokenService.getToken().subscribe(
@@ -163,9 +161,11 @@ export class CallComponent implements OnInit {
                         console.log(datain.status);
                         if (datain.status === 200) {
                             console.log(datain);
+                            this.searchLogs = datain;
                             this.logs = datain;
                         } else {
                             console.log(datain);
+                            this.searchLogs = datain;
                             this.logs = datain;
                         }
                         this.showSpinner = false;
@@ -181,94 +181,5 @@ export class CallComponent implements OnInit {
         //     }
         // );
     }
-
-    // updatelogAcao(log){
-    //     // this.tokenService.getToken().subscribe(
-    //     //     dataToken => {
-    //     //         console.log(dataToken.access_token);
-    //     //         this.access_token = dataToken.access_token;
-    //     this.showSpinner = true;
-    //             this.getService.updatelog(log, this.access_token).subscribe(
-    //                 data => {
-    //                     console.log(data.status);
-    //                     this.logs = data;
-    //                     this.statusApi = 1;
-    //                     this.showSpinner = false
-    //                 },
-    //                 error => {
-    //                     console.log(error);
-    //                     this.statusApi = 2;
-    //                     this.showSpinner = false
-    //                 }
-    //             );
-    //     //     } ,
-    //     //     errorToken => {
-    //     //         console.log(errorToken);
-    //     //     }
-    //     // );
-    // }
-    //
-    // createlogAcao(log){
-    //     // this.tokenService.getToken().subscribe(
-    //     //     dataToken => {
-    //     //         console.log(dataToken.access_token);
-    //     //         this.access_token = dataToken.access_token;
-    //     this.showSpinner = true;
-    //             this.getService.createlog(log, this.access_token).subscribe(
-    //                 data => {
-    //                     console.log(data.status);
-    //                     this.logs = data;
-    //                     this.statusApi = 1;
-    //                     this.showSpinner = false;
-    //                 },
-    //                 error => {
-    //                     console.log(error);
-    //                     this.statusApi = 2;
-    //                     this.showSpinner = false;
-    //                 }
-    //             );
-    //     //     } ,
-    //     //     errorToken => {
-    //     //         console.log(errorToken);
-    //     //     }
-    //     // );
-    // }
-    //
-    // deletelogAcao(log) {
-    //     // this.tokenService.getToken().subscribe(
-    //     //     dataToken => {
-    //     //         console.log(dataToken.access_token);
-    //     //         this.access_token = dataToken.access_token;
-    //             this.getService.deletelog(log.id, this.access_token).subscribe(
-    //                 data => {
-    //                     this.getlogs();
-    //                     this.deleteClose();
-    //                 },
-    //                 error => {
-    //                     this.statusApi = 2;
-    //                     }
-    //             );
-    //     //     } ,
-    //     //     errorToken => {
-    //     //         console.log(errorToken);
-    //     //     }
-    //     // );
-    // }
-
-    submitSucesso() {
-        if (this.statusApi === 1) {
-            return true;
-        } else {
-            return false;
-        };
-    }
-    submitFalha() {
-        if (this.statusApi === 2) {
-            return true;
-        } else {
-            return false;
-        };
-    }
-
 
 }

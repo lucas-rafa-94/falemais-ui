@@ -6,10 +6,10 @@ import {TokenService} from '../services/token/token.service';
 
 @Component({
   selector: 'app-download',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  templateUrl: './adminUsers.component.html',
+  styleUrls: ['./adminUsers.component.css']
 })
-export class UsersComponent implements OnInit {
+export class AdminUsersComponent implements OnInit {
     getService;
     showSpinner;
     usuarios;
@@ -19,12 +19,8 @@ export class UsersComponent implements OnInit {
     deleteOpen;
     statusApi = 0;
     usuarioSelecionado = {
-        hubId: '',
-        idPabx: '',
-        faleMaisToken: '',
-        ramal: '',
-        urlPabx: '',
-        email: ''
+        user: '',
+        password: ''
     }
     visualizacaoOpen;
     criaOrUpdateOpen;
@@ -104,6 +100,10 @@ export class UsersComponent implements OnInit {
     }
 
     updateClose() {
+        this.usuarioSelecionado = {
+            user: '',
+            password: ''
+        }
         this.statusApi = 0;
         this.criaOrUpdateOpen = false;
         this.createOpen = false;
@@ -113,6 +113,7 @@ export class UsersComponent implements OnInit {
 
 
     openEditar(usuario) {
+        console.log(usuario);
         this.usuarioSelecionado = usuario;
         this.criaOrUpdateOpen = true;
         this.visualizacaoOpen = false;
@@ -125,7 +126,7 @@ export class UsersComponent implements OnInit {
         //         console.log(data.access_token);
         //         this.access_token = data.access_token;
         this.showSpinner = true;
-                this.getService.getUsuariosCadastrados(this.access_token).subscribe(
+                this.getService.getUsuariosAdmin(this.access_token).subscribe(
                     datain => {
                         console.log(datain.status);
                         if (datain.status === 200) {
@@ -155,7 +156,7 @@ export class UsersComponent implements OnInit {
         //         console.log(dataToken.access_token);
         //         this.access_token = dataToken.access_token;
         this.showSpinner = true;
-                this.getService.updateUsuario(usuario, this.access_token).subscribe(
+                this.getService.updateUsuarioAdmin(usuario, this.access_token).subscribe(
                     data => {
                         // console.log(data.status);
                         this.usuarios = data;

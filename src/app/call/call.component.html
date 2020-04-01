@@ -10,19 +10,34 @@
 <!--                <button type="button" openCreate (click)="openCreate()" id="create" class="btn btn-block btn-primary">Novo Usuário</button>-->
 <!--            </div>-->
             <div class="inner-addon right-addon">
-                <i class="glyphicon glyphicon-search"></i>
-                <input class="form-control" type="text" name="search" id="inputSearch" placeholder="Busque pelo Hub Id" [(ngModel)]="hubId">
+<!--                <i class="glyphicon glyphicon-search"></i>-->
+<!--                <input class="form-control" type="text" name="search" id="inputSearch" placeholder="Busque pelo Hub Id" [(ngModel)]="hubId">-->
+                <input class="form-control" [(ngModel)]="search.idHub" type="text" name="searchHubId" id="inputSearchHubId" placeholder="Filtro por Hub Id">
+                <br>
+                <input class="form-control" [(ngModel)]="search.idPabx"  type="text" name="searchPabxId" id="inputSearchPabxId" placeholder="Filtro por Pabx Id">
+                <br>
+                <input class="form-control" [(ngModel)]="search.telefone"  type="text" name="searchTelefone" id="inputSearchTelefone" placeholder="Filtro por Telefone">
+                <br>
+                <div class="col-md-14">
+                    <button type="button" (click)="searchBtn()" id="searchBtn" class="btn btn-block btn-primary">Pesquisar</button>
+                </div>
+                <div class="col-md-14">
+                    <button type="button" (click)="excluirBtn()" id="excluirBtn" class="btn btn-block btn-primary">Exclur Filtros</button>
+                </div>
             </div>
             <div *ngIf="visualizacao()" class="table100 ver1 m-b-110">
                 <div class="table100-head">
                     <table>
                         <thead>
                         <tr class="row100 head">
-                            <th class="cell100 column1">Id Log</th>
+                            <th class="cell100 column1">Call Id</th>
                             <th class="cell100 column2">Hub Id</th>
-                            <th class="cell100 column3">Operação</th>
-                            <th class="cell100 column4">Status</th>
-                            <th class="cell100 column5">Payload</th>
+                            <th class="cell100 column3">Id Pabx</th>
+                            <th class="cell100 column3">Telefone</th>
+                            <th class="cell100 column3">Data</th>
+                            <th class="cell100 column4">Operação</th>
+                            <th class="cell100 column5">Status</th>
+                            <th class="cell100 column5">Ação</th>
                         </tr>
                         </thead>
                     </table>
@@ -32,11 +47,14 @@
                     <table>
                         <tbody>
                         <tr *ngFor="let log of logs| filter:hubId | paginate: { itemsPerPage: 20, currentPage: p };" class="row100 body">
-                            <td class="cell100 column1">{{log.idLog}}</td>
+                            <td class="cell100 column1">{{log.callId}}</td>
                             <td class="cell100 column2">{{log.hubId}}</td>
-                            <td class="cell100 column3">{{log.operacao}}</td>
-                            <td class="cell100 column4">{{log.status}}</td>
-                            <td class="cell100 column5">{{log.payload}}</td>
+                            <td class="cell100 column3">{{log.idPabx}}</td>
+                            <td class="cell100 column3">{{log.telefone}}</td>
+                            <td class="cell100 column3">{{log.endDate}}</td>
+                            <td class="cell100 column4">{{log.operacao}}</td>
+                            <td class="cell100 column5">{{log.status}}</td>
+                            <td class="cell100 column5"><a (click)="openEditar(log)">Visualizar</a></td>
                         </tr>
                         </tbody>
                         <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -61,70 +79,138 @@
 
 
 
-<!--<div *ngIf="updateUsuario()" [ng2-loading]="showSpinner" class="home">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-2"></div>-->
-<!--            <div class="jumbotron col-md-8">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-10">-->
-<!--                        <h1 class="display-3">Usuários</h1>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-2">-->
-<!--                        <a (click)="updateClose()" class="btn btn-outline-danger">-->
-<!--                            <span class="glyphicon glyphicon-log-out" ></span> Voltar-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <br>-->
-<!--                <form>-->
-<!--                    <div>-->
-<!--                        <p class="lead">Nome</p>-->
-<!--                        <hr class="my-4">-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input [(ngModel)]="usuarioSelecionado.nome" name="givenName" type="text" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr class="my-4">-->
-<!--                    <br>-->
-<!--                    <div>-->
-<!--                        <p class="lead">Email</p>-->
-<!--                        <hr class="my-4">-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input [(ngModel)]="usuarioSelecionado.email" name="familyName" type="text" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr class="my-4">-->
-<!--                    <br>-->
-<!--                    <div>-->
-<!--                        <p class="lead">Senha</p>-->
-<!--                        <hr class="my-4">-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input [(ngModel)]="usuarioSelecionado.password" name="email" type="password" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr class="my-4">-->
-<!--                    <div class="col-md-14">-->
-<!--                        <button (click)="updateUsuarioAcao(usuarioSelecionado)" id="btUsuario" type="button" class="btn btn-block btn-primary">Atualizar Usuário</button>-->
-<!--                    </div>-->
-<!--                    <br>-->
-<!--                    <div *ngIf="submitSucesso()" id="submitSucesso" class="alert alert-success" role="alert">-->
-<!--                        <strong>{{usuarioSelecionado.nome}}</strong> atualizado com sucesso.-->
-<!--                    </div>-->
-<!--                    <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">-->
-<!--                        <strong>{{usuarioSelecionado.nome}}</strong> atualizado com falha.-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div *ngIf="updateUsuario()" [ng2-loading]="showSpinner" class="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron col-md-8">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h1 class="display-3">Logs</h1>
+                    </div>
+                    <div class="col-md-2">
+                        <a (click)="updateClose()" class="btn btn-outline-danger">
+                            <span class="glyphicon glyphicon-log-out" ></span> Voltar
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <form>
+                    <div>
+                        <p class="lead">Call Id</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.callId}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Id Pabx</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.idPabx}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Hub Id</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.hubId}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Telefone</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.telefone}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Operação</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.operacao}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Operação</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.status}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Request</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.payloadRequest}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Response</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.payloadResponse}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Data Início</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.startDate}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Data Fim</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>{{logselecionado.endDate}}</h6>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

@@ -21,6 +21,7 @@ export class UsersSemCadastroComponent implements OnInit {
     usuarioSelecionado = {
         hubId: '',
         faleMaisToken: '',
+        idPabx: '',
         ramal: '',
         urlPabx: '',
         email: ''
