@@ -2,31 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6348538d-5960-4b4e-8602-585cd51a68a0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/adminUsers/adminUsers.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/adminUsers/adminUsers.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/adminUsers/adminUsers.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/adminUsers/adminUsers.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/logo1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/logo2.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/logo3.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/logo4.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/call/call.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/call/call.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/call/call.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/call/call.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/call/call.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/call/call.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/navbar/navbar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/navbar/navbar.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/navbar/navbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/call/call.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/call/call.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/loginIn/login-in.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/loginIn/login-in.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/users/users.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/users.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/users.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/users/users.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/users.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/usersSemCadastro/usersSemCadastro.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/usersSemCadastro/usersSemCadastro.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/usersSemCadastro/usersSemCadastro.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/usersSemCadastro/usersSemCadastro.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +230,7 @@
       <workItem from="1585165804278" duration="29623000" />
       <workItem from="1585597191488" duration="691000" />
       <workItem from="1585680495651" duration="4667000" />
-      <workItem from="1585757208217" duration="12364000" />
+      <workItem from="1585757208217" duration="13909000" />
     </task>
     <servers />
   </component>
