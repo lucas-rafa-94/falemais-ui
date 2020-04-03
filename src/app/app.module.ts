@@ -49,7 +49,6 @@ import 'hammerjs';
       FormsModule, NgbModule.forRoot(),
       RouterModule.forRoot([
           { path: 'index.html', component: LoginPageComponent},
-          { path: '', component: LoginPageComponent},
           { path: 'users', component: UsersComponent},
           { path: 'admin-users', component: AdminUsersComponent},
           { path: 'users-nao-cadastrados', component: UsersSemCadastroComponent},
