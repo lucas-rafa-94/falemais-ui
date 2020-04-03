@@ -15,7 +15,6 @@ export class UsersComponent implements OnInit {
     usuarios;
     access_token;
     tokenService;
-    msgDelete = '';
     deleteOpen;
     statusApi = 0;
     usuarioSelecionado = {
@@ -34,7 +33,7 @@ export class UsersComponent implements OnInit {
 
     getTokenSession() {
         if (!localStorage.getItem('currentToken') || localStorage.getItem('currentToken') === '') {
-            this.router.navigate(['index.html']);
+            this.router.navigate(['']);
         }
     }
 
@@ -51,12 +50,6 @@ export class UsersComponent implements OnInit {
         this.showSpinner = true;
     }
 
-
-    openLg(content, usuario) {
-            console.log(usuario.nome)
-            this.modalService.open(content, {size: 'lg'});
-            this.msgDelete = usuario.nome;
-    }
 
 
     ngOnInit() {
@@ -120,10 +113,7 @@ export class UsersComponent implements OnInit {
     }
 
     getUsuarios() {
-        // this.tokenService.getToken().subscribe(
-        //     data => {
-        //         console.log(data.access_token);
-        //         this.access_token = data.access_token;
+
         this.showSpinner = true;
                 this.getService.getUsuariosCadastrados(this.access_token).subscribe(
                     datain => {
@@ -142,18 +132,10 @@ export class UsersComponent implements OnInit {
                         this.showSpinner = false;
                     }
                 );
-        //     } ,
-        //     error => {
-        //         console.log(error);
-        //     }
-        // );
+
     }
 
     updateUsuarioAcao(usuario){
-        // this.tokenService.getToken().subscribe(
-        //     dataToken => {
-        //         console.log(dataToken.access_token);
-        //         this.access_token = dataToken.access_token;
         this.showSpinner = true;
                 this.getService.updateUsuario(usuario, this.access_token).subscribe(
                     data => {
@@ -168,44 +150,9 @@ export class UsersComponent implements OnInit {
                         this.showSpinner = false;
                     }
                 );
-        //     } ,
-        //     errorToken => {
-        //         console.log(errorToken);
-        //     }
-        // );
     }
-    //
-    // createUsuarioAcao(usuario){
-    //     // this.tokenService.getToken().subscribe(
-    //     //     dataToken => {
-    //     //         console.log(dataToken.access_token);
-    //     //         this.access_token = dataToken.access_token;
-    //     this.showSpinner = true;
-    //             this.getService.createUsuario(usuario, this.access_token).subscribe(
-    //                 data => {
-    //                     console.log(data.status);
-    //                     this.usuarios = data;
-    //                     this.statusApi = 1;
-    //                     this.showSpinner = false;
-    //                 },
-    //                 error => {
-    //                     console.log(error);
-    //                     this.statusApi = 2;
-    //                     this.showSpinner = false;
-    //                 }
-    //             );
-    //     //     } ,
-    //     //     errorToken => {
-    //     //         console.log(errorToken);
-    //     //     }
-    //     // );
-    // }
-    //
+
     deleteUsuarioAcao(usuario) {
-        // this.tokenService.getToken().subscribe(
-        //     dataToken => {
-        //         console.log(dataToken.access_token);
-        //         this.access_token = dataToken.access_token;
                 this.getService.deleteUsuario(usuario, this.access_token).subscribe(
                     data => {
                         this.getUsuarios();
@@ -215,11 +162,7 @@ export class UsersComponent implements OnInit {
                         this.statusApi = 2;
                         }
                 );
-        //     } ,
-        //     errorToken => {
-        //         console.log(errorToken);
-        //     }
-        // );
+
     }
 
     submitSucesso() {

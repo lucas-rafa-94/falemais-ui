@@ -6,12 +6,7 @@
 <div *ngIf="visualizacao()" [ng2-loading]="showSpinner" class="limiter">
     <div class="container-table100">
         <div class="wrap-table100">
-<!--            <div class="col-md-14">-->
-<!--                <button type="button" openCreate (click)="openCreate()" id="create" class="btn btn-block btn-primary">Novo Usuário</button>-->
-<!--            </div>-->
             <div class="inner-addon right-addon">
-<!--                <i class="glyphicon glyphicon-search"></i>-->
-<!--                <input class="form-control" type="text" name="search" id="inputSearch" placeholder="Busque pelo Hub Id" [(ngModel)]="hubId">-->
                 <input class="form-control" [(ngModel)]="search.idHub" type="text" name="searchHubId" id="inputSearchHubId" placeholder="Filtro por Hub Id">
                 <br>
                 <input class="form-control" [(ngModel)]="search.idPabx"  type="text" name="searchPabxId" id="inputSearchPabxId" placeholder="Filtro por Pabx Id">
@@ -24,6 +19,11 @@
                 <div class="col-md-14">
                     <button type="button" (click)="excluirBtn()" id="excluirBtn" class="btn btn-block btn-primary">Exclur Filtros</button>
                 </div>
+                <div class="col-md-14">
+                    <button type="button" (click)="excluirBtnLogs()" id="excluirBtLogs" class="btn btn-block btn-danger">Exclur Logs</button>
+                </div>
+                <br>
+                <br>
             </div>
             <div *ngIf="visualizacao()" class="table100 ver1 m-b-110">
                 <div class="table100-head">
@@ -46,7 +46,7 @@
                 <div class="table100-body js-pscroll">
                     <table>
                         <tbody>
-                        <tr *ngFor="let log of logs| filter:hubId | paginate: { itemsPerPage: 20, currentPage: p };" class="row100 body">
+                        <tr *ngFor="let log of logs| filter:hubId | paginate: { itemsPerPage: 30, currentPage: p };" class="row100 body">
                             <td class="cell100 column1">{{log.callId}}</td>
                             <td class="cell100 column2">{{log.hubId}}</td>
                             <td class="cell100 column3">{{log.idPabx}}</td>
@@ -216,97 +216,56 @@
 
 
 
-<!--<div *ngIf="createUsuario()" [ng2-loading]="showSpinner" class="home">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-2"></div>-->
-<!--            <div class="jumbotron col-md-8">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-10">-->
-<!--                        <h1 class="display-3">Usuários</h1>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-2">-->
-<!--                        <a (click)="createClose()" class="btn btn-outline-danger">-->
-<!--                            <span class="glyphicon glyphicon-log-out" ></span> Voltar-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <br>-->
-<!--                <form>-->
-<!--                    <div>-->
-<!--                        <p class="lead">Nome</p>-->
-<!--                        <hr class="my-4">-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input [(ngModel)]="usuarioSelecionado.nome" name="givenName" type="text" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr class="my-4">-->
-<!--                    <br>-->
-<!--                    <div>-->
-<!--                        <p class="lead">Email</p>-->
-<!--                        <hr class="my-4">-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input [(ngModel)]="usuarioSelecionado.email" name="familyName" type="text" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr class="my-4">-->
-<!--                    <br>-->
-<!--                    <div>-->
-<!--                        <p class="lead">Senha</p>-->
-<!--                        <hr class="my-4">-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input [(ngModel)]="usuarioSelecionado.password" name="email" type="password" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr class="my-4">-->
-<!--                    <div class="col-md-14">-->
-<!--                        <button (click)="createUsuarioAcao(usuarioSelecionado)" id="btUsuario" type="button" class="btn btn-block btn-primary">Criar Usuário</button>-->
-<!--                    </div>-->
-<!--                    <br>-->
-<!--                    <div *ngIf="submitSucesso()" id="submitSucesso" class="alert alert-success" role="alert">-->
-<!--                        <strong>{{usuarioSelecionado.nome}}</strong> criado com sucesso.-->
-<!--                    </div>-->
-<!--                    <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">-->
-<!--                        <strong>{{usuarioSelecionado.nome}}</strong> criado com falha.-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--<div *ngIf="deleteUsuario()" [ng2-loading]="showSpinner" class="home">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-2"></div>-->
-<!--            <div class="jumbotron col-md-8">-->
-<!--                <div class="row">-->
-<!--                    <form>-->
-<!--                        <div>-->
-<!--                            <p class="lead">Deseja excluir o usuário <strong>{{usuarioSelecionado.nome}}</strong> ? </p>-->
-<!--                            <hr class="my-4">-->
-<!--                        </div>-->
-<!--                        <div class="col-md-14">-->
-<!--                            <button (click)="deleteUsuarioAcao(usuarioSelecionado)" id="btDeleteConfirm" type="button" class="btn btn-block btn-primary">Ok</button>-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <div class="col-md-14">-->
-<!--                            <button (click)="deleteClose()" id="btDeleteCancel" type="button" class="btn btn-block btn-primary">Cancelar</button>-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">-->
-<!--                            <strong>{{usuarioSelecionado.nome}}</strong> deletado com falha.-->
-<!--                        </div>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+<div *ngIf="deleteLogs()" [ng2-loading]="showSpinner" class="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron col-md-8">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h1 class="display-3">Excluir Logs</h1>
+                    </div>
+                    <div class="col-md-2">
+                        <a (click)="deleteLogOpenClose()" class="btn btn-outline-danger">
+                            <span class="glyphicon glyphicon-log-out" ></span> Voltar
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <form>
+                    <div>
+                        <p class="lead">Data Máxima (ANO-MÊS-DIA)</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="filterLog.min" name="min" placeholder="2020-04-30" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Data Mínima (ANO-MÊS-DIA)</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="filterLog.max" name="max" placeholder="2020-04-30" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="col-md-14">
+                        <button (click)="deleteCall(filterLog)" id="btUsuario" type="button" class="btn btn-block btn-primary">Deletar</button>
+                    </div>
+                    <br>
+                    <div *ngIf="submitSucesso()" id="submitSucesso" class="alert alert-success" role="alert">
+                         Delete com sucesso.
+                    </div>
+                    <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">
+                        Delete com falha.
+                    </div>
+                </form>
+            </div>
+    </div>
+</div>
 

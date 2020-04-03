@@ -20,6 +20,10 @@ export class CallComponent implements OnInit {
     msgDelete = '';
     deleteOpen;
     statusApi = 0;
+    filterLog = {
+        max: '',
+        min: ''
+    };
     logselecionado = {
         idLog: '',
         hubId: 0,
@@ -41,13 +45,14 @@ export class CallComponent implements OnInit {
     };
     visualizacaoOpen;
     criaOrUpdateOpen;
+    deleteLogOpen;
     createOpen;
     confirmaDelete;
     p: number = 1;
 
     getTokenSession() {
         if (!localStorage.getItem('currentToken') || localStorage.getItem('currentToken') === '') {
-            this.router.navigate(['index.html']);
+            this.router.navigate(['']);
         }
     }
 
@@ -56,12 +61,37 @@ export class CallComponent implements OnInit {
         this.getService = service;
         this.tokenService = tokenService;
         this.visualizacaoOpen = true;
+        this.deleteLogOpen = false;
         this.criaOrUpdateOpen = false;
         this.createOpen = false;
         this.deleteOpen = false;
         this.confirmaDelete = false;
         this.getCall();
         this.showSpinner = true;
+    }
+
+    excluirBtnLogs(){
+        this.filterLog = {
+            max: '',
+            min: ''
+        };
+        this.statusApi = 0;
+        this.visualizacaoOpen = false;
+        this.deleteLogOpen = true;
+        this.criaOrUpdateOpen = false;
+        this.createOpen = false;
+        this.deleteOpen = false;
+        this.confirmaDelete = false;
+    }
+
+    deleteLogOpenClose(){
+        this.visualizacaoOpen = true;
+        this.deleteLogOpen = false;
+        this.criaOrUpdateOpen = false;
+        this.createOpen = false;
+        this.deleteOpen = false;
+        this.getCall();
+        this.confirmaDelete = false;
     }
 
 
@@ -123,6 +153,15 @@ export class CallComponent implements OnInit {
         }
     }
 
+
+    deleteLogs(){
+        if(this.deleteLogOpen) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     visualizacao(){
         if(this.visualizacaoOpen) {
             return true;
@@ -151,10 +190,6 @@ export class CallComponent implements OnInit {
 
 
     getCall() {
-        // this.tokenService.getToken().subscribe(
-        //     data => {
-        //         console.log(data.access_token);
-        //         this.access_token = data.access_token;
         this.showSpinner = true;
                 this.getService.getCall(this.access_token).subscribe(
                     datain => {
@@ -175,11 +210,35 @@ export class CallComponent implements OnInit {
                         this.showSpinner = false;
                     }
                 );
-        //     } ,
-        //     error => {
-        //         console.log(error);
-        //     }
-        // );
+    }
+
+    deleteCall(filter) {
+        this.showSpinner = true;
+        this.getService.deleteLogs(filter).subscribe(
+            data => {
+                this.statusApi = 1;
+                this.showSpinner = false;
+            },
+            error => {
+                this.statusApi = 2;
+                this.showSpinner = false;
+            }
+        );
+    }
+
+    submitSucesso() {
+        if (this.statusApi === 1) {
+            return true;
+        } else {
+            return false;
+        };
+    }
+    submitFalha() {
+        if (this.statusApi === 2) {
+            return true;
+        } else {
+            return false;
+        };
     }
 
 }

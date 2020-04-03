@@ -19,6 +19,7 @@ export class AdminUsersComponent implements OnInit {
     deleteOpen;
     statusApi = 0;
     usuarioSelecionado = {
+        idUserAdmin: '',
         user: '',
         password: ''
     }
@@ -30,8 +31,24 @@ export class AdminUsersComponent implements OnInit {
 
     getTokenSession() {
         if (!localStorage.getItem('currentToken') || localStorage.getItem('currentToken') === '') {
-            this.router.navigate(['index.html']);
+            this.router.navigate(['']);
         }
+    }
+
+    createUsuario(){
+        if(this.createOpen) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    createClose() {
+        this.statusApi = 0;
+        this.criaOrUpdateOpen = false;
+        this.createOpen = false;
+        this.visualizacaoOpen = true;
+        this.getUsuarios();
     }
 
     constructor(private router: Router, service: UsersService , private modalService: NgbModal, tokenService: TokenService) {
@@ -56,6 +73,18 @@ export class AdminUsersComponent implements OnInit {
 
 
     ngOnInit() {
+    }
+
+
+    openCreate() {
+        this.usuarioSelecionado = {
+            idUserAdmin: '',
+            user: '',
+            password: ''
+        };
+        this.criaOrUpdateOpen = false;
+        this.visualizacaoOpen = false;
+        this.createOpen = true;
     }
 
     deleteClose() {
@@ -101,6 +130,7 @@ export class AdminUsersComponent implements OnInit {
 
     updateClose() {
         this.usuarioSelecionado = {
+            idUserAdmin: '',
             user: '',
             password: ''
         }
@@ -156,7 +186,7 @@ export class AdminUsersComponent implements OnInit {
         //         console.log(dataToken.access_token);
         //         this.access_token = dataToken.access_token;
         this.showSpinner = true;
-                this.getService.updateUsuarioAdmin(usuario, this.access_token).subscribe(
+                this.getService.updateUsuarioAdmin(usuario).subscribe(
                     data => {
                         // console.log(data.status);
                         this.usuarios = data;
@@ -176,38 +206,38 @@ export class AdminUsersComponent implements OnInit {
         // );
     }
     //
-    // createUsuarioAcao(usuario){
-    //     // this.tokenService.getToken().subscribe(
-    //     //     dataToken => {
-    //     //         console.log(dataToken.access_token);
-    //     //         this.access_token = dataToken.access_token;
-    //     this.showSpinner = true;
-    //             this.getService.createUsuario(usuario, this.access_token).subscribe(
-    //                 data => {
-    //                     console.log(data.status);
-    //                     this.usuarios = data;
-    //                     this.statusApi = 1;
-    //                     this.showSpinner = false;
-    //                 },
-    //                 error => {
-    //                     console.log(error);
-    //                     this.statusApi = 2;
-    //                     this.showSpinner = false;
-    //                 }
-    //             );
-    //     //     } ,
-    //     //     errorToken => {
-    //     //         console.log(errorToken);
-    //     //     }
-    //     // );
-    // }
+    createUsuarioAcao(usuario){
+        // this.tokenService.getToken().subscribe(
+        //     dataToken => {
+        //         console.log(dataToken.access_token);
+        //         this.access_token = dataToken.access_token;
+        // this.showSpinner = true;
+        //         this.getService.createUsuario(usuario, this.access_token).subscribe(
+        //             data => {
+        //                 console.log(data.status);
+        //                 this.usuarios = data;
+        //                 this.statusApi = 1;
+        //                 this.showSpinner = false;
+        //             },
+        //             error => {
+        //                 console.log(error);
+        //                 this.statusApi = 2;
+        //                 this.showSpinner = false;
+        //             }
+        //         );
+        //     } ,
+        //     errorToken => {
+        //         console.log(errorToken);
+        //     }
+        // );
+    }
     //
     deleteUsuarioAcao(usuario) {
         // this.tokenService.getToken().subscribe(
         //     dataToken => {
         //         console.log(dataToken.access_token);
         //         this.access_token = dataToken.access_token;
-                this.getService.deleteUsuario(usuario, this.access_token).subscribe(
+                this.getService.deleteUsuarioAdmin(usuario, this.access_token).subscribe(
                     data => {
                         this.getUsuarios();
                         this.deleteClose();

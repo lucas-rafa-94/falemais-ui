@@ -3,9 +3,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class LoginInService {
-    //private url = 'https://CrudRegioes-mktdigitaloi.brcom-central-1.oraclecloud.com/api/v1';
-    // private url = 'https://oitesteback.herokuapp.com/api/v1';
-     private url = 'http://170.254.79.160:8084/admin/v1/api/login';
+
+    //  private url = 'http://170.254.79.160:8084/admin/v1/api/login';
+     private url = 'http://localhost:8081/admin/v1/api/login';
 
   constructor(private http: HttpClient) {}
 

@@ -608,9 +608,9 @@ tr.row100.body:hover {
   margin: 10px;
 }
 
-button.btn.btn-block.btn-primary {
-  height: 150px;
-}
+/*button.btn.btn-block.btn-primary {*/
+/*  height: 150px;*/
+/*}*/
 
 .display-3 {
   font-size: 3.5rem;

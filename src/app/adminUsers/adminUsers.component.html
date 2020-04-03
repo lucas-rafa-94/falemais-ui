@@ -6,9 +6,9 @@
 <div *ngIf="visualizacao()" [ng2-loading]="showSpinner" class="limiter">
     <div class="container-table100">
         <div class="wrap-table100">
-<!--            <div class="col-md-14">-->
-<!--                <button type="button" openCreate (click)="openCreate()" id="create" class="btn btn-block btn-primary">Novo Usuário</button>-->
-<!--            </div>-->
+            <div class="col-md-14">
+                <button type="button" (click)="openCreate()" id="create" class="btn btn-block btn-primary">Novo Usuário</button>
+            </div>
             <div class="inner-addon right-addon">
                 <i class="glyphicon glyphicon-search"></i>
                 <input class="form-control" type="text" name="search" id="inputSearch" placeholder="Busque pelo hub id" [(ngModel)]="user">
@@ -31,7 +31,7 @@
                         <tbody>
                         <tr *ngFor="let usuario of usuarios| filter:user | paginate: { itemsPerPage: 20, currentPage: p };" class="row100 body">
                             <td class="cell100 column1">{{usuario.user}}</td>
-                            <td class="cell100 column5"><a (click)="openEditar(usuario)">Editar</a></td>
+                            <td class="cell100 column5"><a (click)="openEditar(usuario)">Editar</a> | <a (click)="openDelete(usuario)">Excluir</a></td>
                         </tr>
                         </tbody>
                         <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -41,9 +41,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <div *ngIf="updateUsuario()" [ng2-loading]="showSpinner" class="home">
     <div class="container">
@@ -85,7 +82,7 @@
                     <br>
                     <hr class="my-4">
                     <div class="col-md-14">
-                        <button (click)="updateUsuarioAcao(usuarioSelecionado)" id="btUsuario" type="button" class="btn btn-block btn-primary">Atualizar Usuário</button>
+                            <button (click)="updateUsuarioAcao(usuarioSelecionado)" id="btUsuario" type="button" class="btn btn-block btn-primary">Atualizar Usuário</button>
                     </div>
                     <br>
                     <div *ngIf="submitSucesso()" id="submitSucesso" class="alert alert-success" role="alert">
@@ -101,73 +98,59 @@
 </div>
 
 
-
-
-
-<!--<div *ngIf="createUsuario()" [ng2-loading]="showSpinner" class="home">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-2"></div>-->
-<!--            <div class="jumbotron col-md-8">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-10">-->
-<!--                        <h1 class="display-3">Usuários</h1>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-2">-->
-<!--                        <a (click)="createClose()" class="btn btn-outline-danger">-->
-<!--                            <span class="glyphicon glyphicon-log-out" ></span> Voltar-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <br>-->
-<!--                <form>-->
-<!--                    <div>-->
-<!--                        <p class="lead">Nome</p>-->
-<!--                        <hr class="my-4">-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input [(ngModel)]="usuarioSelecionado.nome" name="givenName" type="text" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr class="my-4">-->
-<!--                    <br>-->
-<!--                    <div>-->
-<!--                        <p class="lead">Email</p>-->
-<!--                        <hr class="my-4">-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input [(ngModel)]="usuarioSelecionado.email" name="familyName" type="text" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr class="my-4">-->
-<!--                    <br>-->
-<!--                    <div>-->
-<!--                        <p class="lead">Senha</p>-->
-<!--                        <hr class="my-4">-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input [(ngModel)]="usuarioSelecionado.password" name="email" type="password" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr class="my-4">-->
-<!--                    <div class="col-md-14">-->
-<!--                        <button (click)="createUsuarioAcao(usuarioSelecionado)" id="btUsuario" type="button" class="btn btn-block btn-primary">Criar Usuário</button>-->
-<!--                    </div>-->
-<!--                    <br>-->
-<!--                    <div *ngIf="submitSucesso()" id="submitSucesso" class="alert alert-success" role="alert">-->
-<!--                        <strong>{{usuarioSelecionado.nome}}</strong> criado com sucesso.-->
-<!--                    </div>-->
-<!--                    <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">-->
-<!--                        <strong>{{usuarioSelecionado.nome}}</strong> criado com falha.-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div *ngIf="createUsuario()" [ng2-loading]="showSpinner" class="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron col-md-8">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h1 class="display-3">Usuários</h1>
+                    </div>
+                    <div class="col-md-2">
+                        <a (click)="createClose()" class="btn btn-outline-danger">
+                            <span class="glyphicon glyphicon-log-out" ></span> Voltar
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <form>
+                    <div>
+                        <p class="lead">Usuário</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="usuarioSelecionado.user" name="user" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Senha</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="usuarioSelecionado.password" name="password" type="password" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="col-md-14">
+                        <button (click)="updateUsuarioAcao(usuarioSelecionado)" id="btUsuarioCriar" type="button" class="btn btn-block btn-primary">Criar Usuário</button>
+                    </div>
+                    <br>
+                    <div *ngIf="submitSucesso()" id="submitSucesso" class="alert alert-success" role="alert">
+                        <strong>{{usuarioSelecionado.user}}</strong> criado com sucesso.
+                    </div>
+                    <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">
+                        <strong>{{usuarioSelecionado.password}}</strong> criado com falha.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div *ngIf="deleteUsuario()" [ng2-loading]="showSpinner" class="home">
@@ -178,11 +161,11 @@
                 <div class="row">
                     <form>
                         <div>
-                            <p class="lead">Deseja excluir o usuário <strong>{{usuarioSelecionado.email}}</strong> ? </p>
+                            <p class="lead">Deseja excluir o usuário <strong>{{usuarioSelecionado.user}}</strong> ? </p>
                             <hr class="my-4">
                         </div>
                         <div class="col-md-14">
-                            <button (click)="deleteUsuarioAcao(usuarioSelecionado.email)" id="btDeleteConfirm" type="button" class="btn btn-block btn-primary">Ok</button>
+                            <button (click)="deleteUsuarioAcao(usuarioSelecionado.idUserAdmin)" id="btDeleteConfirm" type="button" class="btn btn-block btn-primary">Ok</button>
                         </div>
                         <br>
                         <div class="col-md-14">
@@ -190,7 +173,7 @@
                         </div>
                         <br>
                         <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">
-                            <strong>{{usuarioSelecionado.email}}</strong> deletado com falha.
+                            <strong>{{usuarioSelecionado.user}}</strong> deletado com falha.
                         </div>
                     </form>
                 </div>
