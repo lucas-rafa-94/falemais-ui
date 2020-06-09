@@ -8,8 +8,8 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
 
-    private url = 'http://170.254.79.160:8084/db/v1/api/hubspot-user';
-    private urlAdmin = 'http://170.254.79.160:8084/admin/v1/api';
+    private url = 'https://hubapi.falemaisvoip.com.br:8443/db/v1/api/hubspot-user';
+    private urlAdmin = 'https://hubapi.falemaisvoip.com.br:8443/admin/v1/api';
 
     // private url = 'http://localhost:8081/db/v1/api/hubspot-user';
     // private urlAdmin = 'http://localhost:8081/admin/v1/api';

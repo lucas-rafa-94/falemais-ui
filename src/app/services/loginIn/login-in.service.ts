@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class LoginInService {
 
-     private url = 'http://170.254.79.160:8084/admin/v1/api/login';
+     private url = 'https://hubapi.falemaisvoip.com.br:8443//admin/v1/api/login';
     //  private url = 'http://localhost:8081/admin/v1/api/login';
 
   constructor(private http: HttpClient) {}
@@ -22,5 +22,3 @@ export class LoginInService {
        return this.http.post(this.url  , data , httpOptions);
    }
 }
-
-

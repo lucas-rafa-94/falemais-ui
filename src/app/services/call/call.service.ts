@@ -7,7 +7,7 @@ export class CallService {
 
   constructor(private http: HttpClient) { }
 
-    private url = 'http://170.254.79.160:8084/db/v1/api/log-audit';
+    private url = 'https://hubapi.falemaisvoip.com.br:8443/db/v1/api/log-audit';
     // private url = 'http://localhost:8081/db/v1/api/log-audit';
     private token = 'YnF1eThuaWdua202MGF0emxtaWpoa2Ixbm5ncGE5ejllbnQ2MGtwd2F5Y2NmNnRmbmJ5cjhhbzB4c3YwYjdheDpXZzM0bjlwcWszR3lOOEFoTG5PU3NqaWx5MHlDTHZlRlJ5Z2huWXljUlJVZ2gxI3RveXk4d0VZaE4wRlNxQmpw';
 
