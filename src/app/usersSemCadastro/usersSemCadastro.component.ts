@@ -19,6 +19,7 @@ export class UsersSemCadastroComponent implements OnInit {
     deleteOpen;
     statusApi = 0;
     usuarioSelecionado = {
+        id: 0,
         hubId: '',
         faleMaisToken: '',
         idPabx: '',

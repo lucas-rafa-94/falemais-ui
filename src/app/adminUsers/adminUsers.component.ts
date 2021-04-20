@@ -19,7 +19,6 @@ export class AdminUsersComponent implements OnInit {
     deleteOpen;
     statusApi = 0;
     usuarioSelecionado = {
-        idUserAdmin: '',
         user: '',
         password: ''
     }
@@ -78,7 +77,6 @@ export class AdminUsersComponent implements OnInit {
 
     openCreate() {
         this.usuarioSelecionado = {
-            idUserAdmin: '',
             user: '',
             password: ''
         };
@@ -130,7 +128,6 @@ export class AdminUsersComponent implements OnInit {
 
     updateClose() {
         this.usuarioSelecionado = {
-            idUserAdmin: '',
             user: '',
             password: ''
         }
